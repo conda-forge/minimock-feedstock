@@ -10,22 +10,23 @@ source:
   sha256: 0e02d3acd756ee85a53b8f05c9826ab280a72df41d03119181321ab5a8e3520e
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
 
 requirements:
   host:
-    - python >=3.4
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.4
+    - python >={{ python_min }}
 
 test:
   imports:
     - {{ name|lower }}
   requires:
     - pip
+    - python {{ python_min }}
   commands:
     - python -m pip check
     - python -m doctest minimock.py
